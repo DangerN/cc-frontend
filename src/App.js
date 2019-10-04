@@ -6,11 +6,17 @@ import logo from './logo.svg';
 import './App.css';
 
 export default () => {
-  const [socket] = useSocket('https://127.0.0.1:1234')
+  const [socket] = useSocket('ws//0.0.0.0:3000')
   socket.connect()
+  console.log(socket);
+
+  // useEffect(()=>{
+  //   socket.on('yeet', ()=>{alert('yeet')})
+  // })
+
   return (
     <p>
-    yeet
+    yee
     </p>
   )
 }
