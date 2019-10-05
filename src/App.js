@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react';
-import useSocket from 'use-socket.io-client';
-import { useImmer } from 'use-immer';
+import React, { useState } from 'react'
+import {useRoutes} from 'hookrouter'
 
+import Board from './components/Board.jsx'
+import Home from './components/Home.jsx'
+
+import {birds, boardList, boardNames} from './mock_data.js'
 import logo from './logo.svg';
-import './App.css';
+import './css/main.css';
+
+const routes = {
+  '/': () => <Home />,
+  '/:board': ({board}) => <Board board={board}/>
+}
 
 export default () => {
-  const [socket] = useSocket('ws//0.0.0.0:3000')
-  socket.connect()
-  console.log(socket);
-
-  // useEffect(()=>{
-  //   socket.on('yeet', ()=>{alert('yeet')})
-  // })
-
-  return (
-    <p>
-    yee
-    </p>
-  )
+  const initialState = {
+    theme: 'light',
+  }
+  const [state, setState] = useState(initialState)
+  const routeResult = useRoutes(routes)
+  return routeResult || null
 }
