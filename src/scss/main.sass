@@ -8,7 +8,8 @@ html, body
   height: 100%
   width: 100%
   display: flex
-  flex-flow: row
+  flex-flow: column
+  align-items: center
 
 .pane
   height: 100%
@@ -17,3 +18,6 @@ html, body
 
 .main
   background-color: yellow
+
+.board-link:not(:first-child):before
+  content: " - "
