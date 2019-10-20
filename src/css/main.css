@@ -59,12 +59,5 @@ html, body {
   flex-flow: column;
   align-items: center; }
 
-.pane {
-  height: 100%;
-  flex-grow: 1; }
-
-.main {
-  background-color: yellow; }
-
 .board-link:not(:first-child):before {
   content: " - "; }

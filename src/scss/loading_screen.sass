@@ -1,0 +1,19 @@
+.loaded
+  animation: fade-out .3s linear 0s 1 forwards
+
+.loading
+  z-index: 10
+
+#loading-screen
+  position: fixed
+  height: 100%
+  width: 100%
+  background-color: blue
+
+@keyframes fade-out
+  from
+    z-index: 10
+    opacity: 1
+  to
+    z-index: -10
+    opacity: 0

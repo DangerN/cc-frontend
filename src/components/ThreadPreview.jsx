@@ -10,7 +10,7 @@ export default () => {
   }
   return (
     <div>
-      <A ><img src='https://www.tinymountainhouses.com/wp-content/uploads/2015/07/placeholder.jpg'/>
+      <A href={`/`}><img src='https://www.tinymountainhouses.com/wp-content/uploads/2015/07/placeholder.jpg'/>
       {props.subject}
       {stats}
       {postPreview}

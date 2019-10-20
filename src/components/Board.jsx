@@ -1,5 +1,5 @@
-import React from 'react'
-import { useRoutes, A } from 'hookrouter'
+import React, { useState } from 'react'
+import { useRoutes, usePath } from 'hookrouter'
 
 import BoardList from './BoardList'
 import Banner from './Banner'
@@ -12,11 +12,20 @@ const routes = {
 }
 
 export default props => {
-  console.log(props);
+  const {send, socketOpen, subscriptions} = props
+  const path = usePath()
   const match = useRoutes(routes)
+  console.log('path', path);
+  console.log('socket status', socketOpen);
+  console.log('subs', subscriptions);
+  const subscribe = () => {
+    subscriptions.push(path)
+  }
+  socketOpen && !subscriptions.includes(path) && subscribe()
   const listThreads = () => {
 
   }
+  console.log(path);
   return (
     <div>
       { match }
