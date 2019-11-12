@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import { useReducer } from 'react'
 
 const useAppState = () => {
   const initialState = {
@@ -28,7 +28,6 @@ const useAppState = () => {
         console.log(action);
         throw new Error('u fugged up lamao')
     }
-    return state
   }
   const [state, dispatch] = useReducer(reducer, initialState)
   return [state, dispatch]

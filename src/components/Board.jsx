@@ -21,7 +21,7 @@ export default props => {
     send(boardIdenifier)
   }
   return (
-    <div>
+    <div className='board' id={boardIdenifier}>
       { match({...props}) }
     </div>
   )

@@ -10,7 +10,7 @@ export default props => {
       return <A key={board} className='board-link-long' href={`/${board}`}>{props.boardList[board].name}</A>})
   }
   return (
-    <div>
+    <div id='home'>
       { announcements() }
       { longBoardList() }
     </div>

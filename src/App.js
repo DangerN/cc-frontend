@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useRoutes, usePath } from 'hookrouter'
+import { useRoutes } from 'hookrouter'
 import useWebSocket from 'react-use-websocket'
 
 import Board from './components/Board'
@@ -9,7 +9,6 @@ import BoardList from './components/BoardList'
 import LoadingScreen from './components/LoadingScreen'
 import useAppState from './useAppState'
 
-import logo from './logo.svg'
 import './css/main.css'
 
 const routes = {
@@ -17,14 +16,12 @@ const routes = {
   '/:board*': ({board}) => (props) => <Board board={board} {...props} />
 }
 
-const CONNECTION_STATUS_CONNECTING = 0
+// const CONNECTION_STATUS_CONNECTING = 0
 const CONNECTION_STATUS_OPEN = 1
-const CONNECTION_STATUS_CLOSING = 2
-const CONNECTION_STATUS_CLOSED = 3
+// const CONNECTION_STATUS_CLOSING = 2
+// const CONNECTION_STATUS_CLOSED = 3
 
 export default props => {
-
-  // this may not be needed as there us a useEffect hook that listens for readyState change.
   const options = useMemo(() => ({
     onOpen: event =>  {
       dispatch({type: 'updateReadyState', readyState: 1})
@@ -40,15 +37,6 @@ export default props => {
   const [state, dispatch] = useAppState()
   const [messageHistory, setMessageHistory] = useState([])
   const [sendMessage, lastMessage, readyState] = useWebSocket('ws://0.0.0.0:42042', options)
-
-  //lol how does this even work?
-  const connectionStatus = {
-    [CONNECTION_STATUS_CONNECTING]: 'Connecting',
-    [CONNECTION_STATUS_OPEN]: 'Open',
-    [CONNECTION_STATUS_CLOSING]: 'Closing',
-    [CONNECTION_STATUS_CLOSED]: 'Closed',
-  }[readyState]
-
   const match = useRoutes(routes)
 
   useEffect(() => {
