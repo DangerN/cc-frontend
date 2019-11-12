@@ -10,19 +10,20 @@ const routes = {
 }
 
 export default props => {
-  const {send, subscriptions, readyState, dispatch} = props
+  const {send, subscriptions, readyState, dispatch, boardList} = props
   const path = usePath()
   const match = useRoutes(routes)
   const [ loaded, setLoaded ] = useState(false)
   const boardIdenifier = /^\/(\w+)/.exec(path)[1]
-  if (!subscriptions.includes(boardIdenifier)) {
+  if (readyState === 1 && !subscriptions.includes(boardIdenifier)) {
+    console.log('readyState', readyState);
     console.log("suubing to ", boardIdenifier);
-    dispatch({type: "subscribe", subscribe: boardIdenifier})
     send(boardIdenifier)
+    dispatch({type: "subscribe", subscribe: boardIdenifier})
   }
   return (
     <div className='board' id={boardIdenifier}>
-      { match({...props}) }
+      { match({...boardList[boardIdenifier]}) }
     </div>
   )
 }

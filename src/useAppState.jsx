@@ -8,7 +8,8 @@ const useAppState = () => {
     subscriptions: [],
     readyState: 3,
     boardList: {},
-    errors: []
+    errors: [],
+    announce: "",
   }
   const reducer = (state, action) => {
     switch (action.type) {
@@ -16,12 +17,14 @@ const useAppState = () => {
         return {...state, loaded: action.loaded}
       case 'updateReadyState':
         return {...state, readyState: action.readyState}
+      case 'announce':
+        return {...state, announce: action.announce}
       case 'boardList':
-        return {...state, boardList: action.boardList}
+        return {...state, boardList: {...action.boardList, ...state.boardList}}
       case 'subscribe':
         return {...state, subscriptions: [...state.subscriptions, action.subscribe]}
       case 'boardDump':
-        return {...state}
+        return {...state, boardList: {...state.boardList, ...action.boardDump}}
       case 'error':
         return {...state, errors: state.errors.push(action.error)}
       default:
