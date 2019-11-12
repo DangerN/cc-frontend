@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useRoutes } from 'hookrouter'
+import { useRoutes, usePath } from 'hookrouter'
 import useWebSocket from 'react-use-websocket'
 
 import Board from './components/Board'
@@ -9,7 +9,6 @@ import BoardList from './components/BoardList'
 import LoadingScreen from './components/LoadingScreen'
 import useAppState from './useAppState'
 
-import {birds, boardList, boardNames} from './mock_data.js'
 import logo from './logo.svg'
 import './css/main.css'
 
@@ -56,6 +55,7 @@ export default props => {
     if (lastMessage !== null) {
       setMessageHistory(previous => previous.concat(lastMessage))
       let message = JSON.parse(lastMessage.data)
+      console.log(message);
       const messageStack = Object.entries(message)
       for (const [action, data] of messageStack) {
         dispatch({type: action, [action]: data})
@@ -73,11 +73,10 @@ export default props => {
     if (readyState !== state.readyState) {
       dispatch({type: 'updateReadyState', readyState: readyState})
     }
+    if (state.readyState === CONNECTION_STATUS_OPEN && !state.loaded) {
+      sendMessage('base')
+    }
   }, [readyState])
-
-  if (state.readyState === CONNECTION_STATUS_OPEN && !state.loaded) {
-    sendMessage('base')
-  }
 
   return (
     <>
