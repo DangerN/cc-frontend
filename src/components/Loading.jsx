@@ -1,8 +1,9 @@
 import React from 'react'
+import { SVG } from '../constants'
 
 export default props => {
-  const {type} = props
-  const loading = {
+  const {type, format} = props
+  return {
     'thread': props => {
       return (
         <div>
@@ -19,11 +20,20 @@ export default props => {
     },
     'screen': ({loaded}) => {
       return (
-        <div id='loading-screen' className={loaded ? 'loaded' : 'loading'}>
+        <div className={loaded ? 'loading-screen loaded' : 'loading loading-screen'}>
           this is a loading screen
         </div>
       )
-    }
+    },
+    'media': {
+      'img': ({ link, loaded, setLoaded}) => {
+        return (
+          <div className={ loaded ? 'curtain-thumb loaded' : 'curtain-thumb loading'}>
+            { SVG.rings() }
+            <img src={link} className='img-thumb' onLoad={()=>setLoaded(true)}/>
+          </div>
+        )
+      }
+    }[format],
   }[type](props)
-  return loading
 }

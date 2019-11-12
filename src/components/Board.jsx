@@ -16,8 +16,6 @@ export default props => {
   const [ loaded, setLoaded ] = useState(false)
   const boardIdenifier = /^\/(\w+)/.exec(path)[1]
   if (readyState === 1 && !subscriptions.includes(boardIdenifier)) {
-    console.log('readyState', readyState);
-    console.log("suubing to ", boardIdenifier);
     send(boardIdenifier)
     dispatch({type: "subscribe", subscribe: boardIdenifier})
   }

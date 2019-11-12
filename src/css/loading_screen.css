@@ -1,15 +1,13 @@
-.loaded {
-  animation: fade-out .3s linear 0s 1 forwards; }
-
-.loading {
-  z-index: 10; }
-
-#loading-screen {
+.loading-screen {
   position: fixed;
   height: 100%;
   width: 100%;
   background-color: blue;
   margin-top: -.5rem; }
+  .loading-screen.loading {
+    z-index: 10; }
+  .loading-screen.loaded {
+    animation: fade-out .3s linear 0s 1 forwards; }
 
 @keyframes fade-out {
   from {
@@ -18,3 +16,26 @@
   to {
     z-index: -10;
     opacity: 0; } }
+
+.curtain-thumb {
+  height: 7rem;
+  width: 7rem;
+  float: left;
+  margin-right: 1rem;
+  position: relative; }
+  .curtain-thumb.loaded .img-thumb {
+    opacity: 1; }
+  .curtain-thumb.loaded .curtain {
+    opacity: 0; }
+  .curtain-thumb.loading .img-thumb {
+    opacity: 0; }
+  .curtain-thumb.loading .curtain {
+    opacity: 1; }
+  .curtain-thumb .img-thumb {
+    height: inherit;
+    width: inherit;
+    position: absolute; }
+  .curtain-thumb .curtain {
+    height: inherit;
+    width: inherit;
+    position: absolute; }

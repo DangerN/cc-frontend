@@ -44,12 +44,8 @@ export default props => {
     if (lastMessage !== null) {
       setMessageHistory(previous => previous.concat(lastMessage))
       let message = JSON.parse(lastMessage.data)
-      console.log("message", message);
       const messageStack = Object.entries(message)
-      console.log("messageStack", messageStack);
       for (const [action, data] of messageStack) {
-        console.log("action", action);
-        console.log("data", data);
         dispatch({type: action, [action]: data})
       }
     }

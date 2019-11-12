@@ -1,15 +1,14 @@
-.loaded
-  animation: fade-out .3s linear 0s 1 forwards
-
-.loading
-  z-index: 10
-
-#loading-screen
+.loading-screen
   position: fixed
   height: 100%
   width: 100%
   background-color: blue
   margin-top: -.5rem
+  &.loading
+    z-index: 10
+  &.loaded
+    animation: fade-out .3s linear 0s 1 forwards
+
 
 @keyframes fade-out
   from
@@ -18,3 +17,29 @@
   to
     z-index: -10
     opacity: 0
+
+
+.curtain-thumb
+  height: 7rem
+  width: 7rem
+  float: left
+  margin-right: 1rem
+  position: relative
+  &.loaded
+    .img-thumb
+      opacity: 1
+    .curtain
+      opacity: 0
+  &.loading
+    .img-thumb
+      opacity: 0
+    .curtain
+      opacity: 1
+  .img-thumb
+    height: inherit
+    width: inherit
+    position: absolute
+  .curtain
+    height: inherit
+    width: inherit
+    position: absolute
