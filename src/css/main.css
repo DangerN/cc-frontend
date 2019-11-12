@@ -75,6 +75,7 @@ html, body {
 
 .banner {
   width: 100%;
+  height: 12vh;
   margin: 1rem 0rem; }
 
 #home {
@@ -83,8 +84,8 @@ html, body {
   flex-flow: column; }
 
 .media-link-thumbnail {
-  height: 4rem;
-  width: 4rem; }
+  height: 7rem;
+  width: 7rem; }
 
 .board {
   width: 100%;

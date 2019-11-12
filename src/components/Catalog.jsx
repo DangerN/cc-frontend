@@ -1,15 +1,13 @@
 import React from 'react'
 import { A } from 'hookrouter'
 
+import Loading from './Loading'
+
 export default props => {
   const { id, name, threads } = props
-  console.log(props);
-  console.log(threads);
   const catalogCards = () => {
     return threads.map(thread => {
       let firstPost = thread.posts[0]
-      console.log(firstPost)
-
       return (<div key={thread.id} className='catalog-card'>
         <A href={`/${id}/${thread.id}`}>
           <p>{thread.id}</p>
@@ -20,7 +18,7 @@ export default props => {
   }
   return (
     <div className='catalog'>
-       {!!threads ? catalogCards() : "something isnt right"}
+       {!!threads ? catalogCards() : <Loading type='catalog' />}
     </div>
   )
 }

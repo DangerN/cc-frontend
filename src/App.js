@@ -6,10 +6,11 @@ import Board from './components/Board'
 import Home from './components/Home'
 import Banner from './components/Banner'
 import BoardList from './components/BoardList'
-import LoadingScreen from './components/LoadingScreen'
+import Loading from './components/Loading'
 import useAppState from './useAppState'
 
 import './css/main.css'
+import './css/loading_screen.css'
 
 const routes = {
   '/': () => props => <Home {...props} />,
@@ -71,7 +72,7 @@ export default props => {
 
   return (
     <>
-      <LoadingScreen loaded={state.loaded} />
+      <Loading type='screen' loaded={state.loaded} />
       <BoardList boardList={state.boardList} />
       <Banner />
       {match({...state, send: sendMessage, dispatch: dispatch})}

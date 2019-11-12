@@ -3,13 +3,27 @@ import React from 'react'
 export default props => {
   const {type} = props
   const loading = {
-    'thread': () => {
+    'thread': props => {
       return (
         <div>
-          tis loadin ah hupe
+          loading thread....
+        </div>
+      )
+    },
+    'catalog': props => {
+      return (
+        <div>
+          loading catalog....
+        </div>
+      )
+    },
+    'screen': ({loaded}) => {
+      return (
+        <div id='loading-screen' className={loaded ? 'loaded' : 'loading'}>
+          this is a loading screen
         </div>
       )
     }
-  }[type]()
+  }[type](props)
   return loading
 }
