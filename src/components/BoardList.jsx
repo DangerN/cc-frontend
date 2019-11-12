@@ -1,8 +1,6 @@
 import React from 'react'
 import { A } from 'hookrouter'
 
-// import { boardList } from '../mock_data'
-
 export default props => {
   const listBoards = () => {
     return Object.keys(props.boardList).map(board => {
