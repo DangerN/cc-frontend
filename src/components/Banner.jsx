@@ -5,6 +5,6 @@ export default props => {
     return `https://www.bu.edu/globalprograms/files/2015/05/banner-placeholder.png`
   }
   return (
-    <img className='banner' src={boardBanner()}/>
+    <img className='banner' alt='banner' src={boardBanner()}/>
   )
 }

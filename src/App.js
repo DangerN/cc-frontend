@@ -24,14 +24,6 @@ const CONNECTION_STATUS_CLOSING = 2
 const CONNECTION_STATUS_CLOSED = 3
 
 export default props => {
-  const initialState = {
-    theme: 'light',
-    loaded: false,
-    socketOpen: false,
-    user: null,
-    board: null,
-    subscriptions: []
-  }
 
   // this may not be needed as there us a useEffect hook that listens for readyState change.
   const options = useMemo(() => ({
@@ -63,9 +55,19 @@ export default props => {
   useEffect(() => {
     if (lastMessage !== null) {
       setMessageHistory(previous => previous.concat(lastMessage))
-      console.log(JSON.parse(lastMessage.data))
+      let message = JSON.parse(lastMessage.data)
+      const messageStack = Object.entries(message)
+      for (const [action, data] of messageStack) {
+        dispatch({type: action, [action]: data})
+      }
     }
   }, [lastMessage])
+
+  useEffect(() => {
+    if (Object.keys(state.boardList).length > 0) {
+      dispatch({type: 'loaded', loaded: true})
+    }
+  }, [state.boardList])
 
   useEffect(() => {
     if (readyState !== state.readyState) {
@@ -75,13 +77,12 @@ export default props => {
 
   if (state.readyState === CONNECTION_STATUS_OPEN && !state.loaded) {
     sendMessage('base')
-    dispatch({type: 'loaded', loaded: true})
   }
 
   return (
     <>
       <LoadingScreen loaded={state.loaded} />
-      <BoardList />
+      <BoardList boardList={state.boardList} />
       <Banner />
       {match({...state, send: sendMessage, dispatch: dispatch})}
     </>

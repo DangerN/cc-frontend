@@ -5,9 +5,9 @@ const useAppState = () => {
     theme: 'light',
     loaded: false,
     user: null,
-    board: null,
     subscriptions: [],
-    readyState: 3
+    readyState: 3,
+    boardList: {},
   }
   const reducer = (state, action) => {
     switch (action.type) {
@@ -15,7 +15,10 @@ const useAppState = () => {
         return {...state, loaded: action.loaded}
       case 'updateReadyState':
         return {...state, readyState: action.readyState}
+      case 'boardList':
+        return {...state, boardList: action.boardList}
       default:
+        console.log(action);
         throw new Error('u fugged up lamao')
     }
     return state
