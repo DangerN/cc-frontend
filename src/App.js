@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useRoutes } from 'hookrouter'
+import { useRoutes, usePath } from 'hookrouter'
 import useWebSocket from 'react-use-websocket'
 
 import Board from './components/Board'
 import Home from './components/Home'
+// eslint-disable-next-line
 import Banner from './components/Banner'
-import BoardList from './components/BoardList'
-import LoadingScreen from './components/LoadingScreen'
+import Menu from './components/Menu'
+import Loading from './components/Loading'
 import useAppState from './useAppState'
 
 import './css/main.css'
+import './css/loading_screen.css'
 
 const routes = {
   '/': () => props => <Home {...props} />,
@@ -43,12 +45,8 @@ export default props => {
     if (lastMessage !== null) {
       setMessageHistory(previous => previous.concat(lastMessage))
       let message = JSON.parse(lastMessage.data)
-      console.log("message", message);
       const messageStack = Object.entries(message)
-      console.log("messageStack", messageStack);
       for (const [action, data] of messageStack) {
-        console.log("action", action);
-        console.log("data", data);
         dispatch({type: action, [action]: data})
       }
     }
@@ -69,11 +67,21 @@ export default props => {
     }
   }, [readyState])
 
+  const path = usePath()
+  useEffect(() => {
+    dispatch({type: 'updatePath', updatePath: path})
+  }, [path])
+
   return (
     <>
-      <LoadingScreen loaded={state.loaded} />
-      <BoardList boardList={state.boardList} />
-      <Banner />
+      <Loading type='screen' loaded={state.loaded} />
+      <Menu boardList={state.boardList} state={state} send={sendMessage} dispatch={dispatch} />
+      <Loading
+        type='banner'
+        format='wide'
+        link={"https://businessbeyondlimits.com/wp-content/uploads/2015/02/400x100.gif"}
+        useLoad={useState(false)}
+      />
       {match({...state, send: sendMessage, dispatch: dispatch})}
     </>
   )

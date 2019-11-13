@@ -1,15 +1,19 @@
-.loaded {
-  animation: fade-out .3s linear 0s 1 forwards; }
-
-.loading {
-  z-index: 10; }
-
-#loading-screen {
+.curtain-screen {
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: blue;
-  margin-top: -.5rem; }
+  background-color: #FFFFFF;
+  margin-top: -.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .curtain-screen.loading {
+    z-index: 10; }
+  .curtain-screen.loaded {
+    animation: fade-out .3s ease 0s 1 forwards; }
+  .curtain-screen .curtain {
+    width: 60%;
+    height: 60%; }
 
 @keyframes fade-out {
   from {
@@ -18,3 +22,35 @@
   to {
     z-index: -10;
     opacity: 0; } }
+
+.curtain {
+  position: relative;
+  overflow: hidden; }
+  .curtain .img {
+    position: absolute;
+    width: 100%; }
+  .curtain .drape {
+    position: absolute; }
+  .curtain.loaded .img {
+    opacity: 1; }
+  .curtain.loaded .drape {
+    opacity: 0; }
+  .curtain.loading .img {
+    opacity: 0; }
+  .curtain.loading .drape {
+    opacity: 1; }
+  .curtain.banner {
+    height: 0;
+    width: 0; }
+
+.menu.compact {
+  width: 100vw;
+  padding: .5em;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around; }
+
+@media (min-width: 600px) {
+  .curtain.banner {
+    height: 100px;
+    width: 400px; } }
