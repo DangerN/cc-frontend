@@ -70,7 +70,12 @@ export default props => {
     <>
       <Loading type='screen' loaded={state.loaded} />
       <BoardList boardList={state.boardList} />
-      <Banner />
+      <Loading
+        type='banner'
+        format='wide'
+        link={"https://businessbeyondlimits.com/wp-content/uploads/2015/02/400x100.gif"}
+        useLoad={useState(false)}
+      />
       {match({...state, send: sendMessage, dispatch: dispatch})}
     </>
   )

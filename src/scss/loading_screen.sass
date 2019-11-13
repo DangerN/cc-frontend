@@ -1,13 +1,19 @@
-.loading-screen
+.curtain-screen
   position: fixed
   height: 100%
   width: 100%
-  background-color: blue
+  background-color: #FFFFFF
   margin-top: -.5rem
+  display: flex
+  align-items: center
+  justify-content: center
   &.loading
     z-index: 10
   &.loaded
-    animation: fade-out .3s linear 0s 1 forwards
+    animation: fade-out .3s ease 0s 1 forwards
+  .curtain
+    width: 60%
+    height: 60%
 
 
 @keyframes fade-out
@@ -19,27 +25,25 @@
     opacity: 0
 
 
-.curtain-thumb
-  height: 7rem
-  width: 7rem
-  float: left
-  margin-right: 1rem
+.curtain
   position: relative
+  .img
+    position: absolute
+    width: 100%
+    height: 100%
+  .drape
+    position: absolute
   &.loaded
-    .img-thumb
+    .img
       opacity: 1
-    .curtain
+    .drape
       opacity: 0
   &.loading
-    .img-thumb
+    .img
       opacity: 0
-    .curtain
+    .drape
       opacity: 1
-  .img-thumb
-    height: inherit
-    width: inherit
-    position: absolute
-  .curtain
-    height: inherit
-    width: inherit
-    position: absolute
+  &.banner
+    height: 23vw
+    width: 94vw
+    margin: 1rem 0rem

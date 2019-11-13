@@ -1,13 +1,19 @@
-.loading-screen {
+.curtain-screen {
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: blue;
-  margin-top: -.5rem; }
-  .loading-screen.loading {
+  background-color: #FFFFFF;
+  margin-top: -.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .curtain-screen.loading {
     z-index: 10; }
-  .loading-screen.loaded {
-    animation: fade-out .3s linear 0s 1 forwards; }
+  .curtain-screen.loaded {
+    animation: fade-out .3s ease 0s 1 forwards; }
+  .curtain-screen .curtain {
+    width: 60%;
+    height: 60%; }
 
 @keyframes fade-out {
   from {
@@ -17,25 +23,23 @@
     z-index: -10;
     opacity: 0; } }
 
-.curtain-thumb {
-  height: 7rem;
-  width: 7rem;
-  float: left;
-  margin-right: 1rem;
+.curtain {
   position: relative; }
-  .curtain-thumb.loaded .img-thumb {
-    opacity: 1; }
-  .curtain-thumb.loaded .curtain {
-    opacity: 0; }
-  .curtain-thumb.loading .img-thumb {
-    opacity: 0; }
-  .curtain-thumb.loading .curtain {
-    opacity: 1; }
-  .curtain-thumb .img-thumb {
-    height: inherit;
-    width: inherit;
+  .curtain .img {
+    position: absolute;
+    width: 100%;
+    height: 100%; }
+  .curtain .drape {
     position: absolute; }
-  .curtain-thumb .curtain {
-    height: inherit;
-    width: inherit;
-    position: absolute; }
+  .curtain.loaded .img {
+    opacity: 1; }
+  .curtain.loaded .drape {
+    opacity: 0; }
+  .curtain.loading .img {
+    opacity: 0; }
+  .curtain.loading .drape {
+    opacity: 1; }
+  .curtain.banner {
+    height: 23vw;
+    width: 94vw;
+    margin: 1rem 0rem; }
