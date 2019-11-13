@@ -4,6 +4,15 @@ export const FLAG_KEY = {
   'media': ['img', 'webm', 'embed']
 }
 
+export const U = {
+  'trim': {
+    'path': string => {
+      if (string.length < 2) return null
+      return /^\/(\w+)/.exec(string)[1]
+    }
+  }
+}
+
 export const SVG = {
   'rings': () => {
     return (

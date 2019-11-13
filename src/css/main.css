@@ -84,7 +84,8 @@ html, body {
 .board {
   width: 94vw;
   overflow: scroll;
-  flex-grow: 1; }
+  flex-grow: 1;
+  max-width: 815px; }
 
 .catalog {
   display: flex;
@@ -95,8 +96,8 @@ html, body {
     border: solid grey 1px;
     border-radius: 3px;
     padding: .3rem;
-    height: 200px;
-    width: 200px; }
+    height: 220px;
+    width: 150px; }
 
 .thread {
   height: 100%;

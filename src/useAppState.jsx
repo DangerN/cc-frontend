@@ -10,6 +10,7 @@ const useAppState = () => {
     boardList: {},
     errors: [],
     announce: "",
+    updatePath: "/"
   }
   const reducer = (state, action) => {
     switch (action.type) {
@@ -17,6 +18,8 @@ const useAppState = () => {
         return {...state, loaded: action.loaded}
       case 'updateReadyState':
         return {...state, readyState: action.readyState}
+      case 'updatePath':
+        return {...state, updatePath: action.updatePath}
       case 'announce':
         return {...state, announce: action.announce}
       case 'boardList':

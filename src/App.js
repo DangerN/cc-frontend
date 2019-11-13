@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useRoutes } from 'hookrouter'
+import { useRoutes, usePath } from 'hookrouter'
 import useWebSocket from 'react-use-websocket'
 
 import Board from './components/Board'
 import Home from './components/Home'
+// eslint-disable-next-line
 import Banner from './components/Banner'
-import BoardList from './components/BoardList'
+import Menu from './components/Menu'
 import Loading from './components/Loading'
 import useAppState from './useAppState'
 
@@ -66,10 +67,15 @@ export default props => {
     }
   }, [readyState])
 
+  const path = usePath()
+  useEffect(() => {
+    dispatch({type: 'updatePath', updatePath: path})
+  }, [path])
+
   return (
     <>
       <Loading type='screen' loaded={state.loaded} />
-      <BoardList boardList={state.boardList} />
+      <Menu boardList={state.boardList} state={state} send={sendMessage} dispatch={dispatch} />
       <Loading
         type='banner'
         format='wide'
