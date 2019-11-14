@@ -1,4 +1,6 @@
 <del>To spin up dev container simply `$ docker-compose up`</del>
+<br>For the time being use `$ npm install && npm start`
+<br>To start Sass compiler service `$ npm run scss`
 ___
 # :cloud: CloudChan :cloud:
 This frontend of CloudChan, a React app driven by micro-served cloud APIs. CloudChan seeks to provide a breath of fresh air to social media. Taking the best and leaving the worst of current social media we will foster [quality discourse](https://encyclopediadramatica.se/Drama) and create a [community first](https://encyclopediadramatica.se/Communism) platform.
