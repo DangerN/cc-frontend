@@ -1,7 +1,7 @@
 .curtain-screen {
-  position: fixed;
-  height: 100%;
-  width: 100%;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
   background-color: #FFFFFF;
   margin-top: -.5rem;
   display: flex;
@@ -11,9 +11,6 @@
     z-index: 10; }
   .curtain-screen.loaded {
     animation: fade-out .3s ease 0s 1 forwards; }
-  .curtain-screen .curtain {
-    width: 60%;
-    height: 60%; }
 
 @keyframes fade-out {
   from {
@@ -21,7 +18,8 @@
     opacity: 1; }
   to {
     z-index: -10;
-    opacity: 0; } }
+    opacity: 0;
+    display: none; } }
 
 .curtain {
   position: relative;
@@ -42,13 +40,6 @@
   .curtain.banner {
     height: 0;
     width: 0; }
-
-.menu.compact {
-  width: 100vw;
-  padding: .5em;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-around; }
 
 @media (min-width: 600px) {
   .curtain.banner {
