@@ -48,7 +48,7 @@ const BoardDropDown = props => {
     <div ref={dropDownRef} className='board-drop-down' onClick={toggleDropDown} >
       <div className='current-board-name'>
         <div className='board-path'>/{U.trim.path(props.state.updatePath)}</div>
-        <div>_-_</div>
+        <div>-</div>
         <div className='board-name'>{!!currentBoard && currentBoard.name}</div>
         <FaCaretDown className='menu-carrot' size='1rem'/>
       </div>
@@ -61,10 +61,12 @@ const BoardDropDown = props => {
 }
 
 const Search = props => {
+  const [searchOpen, setSearchOpen] = useState(false)
+  console.log(props);
   return (
     <div className='search' >
-      <input className='text' type='text' />
-      <FaSearch className='icon' size='1.6em' />
+      <input className={searchOpen ? 'text open' : 'text'} type='text' value={props.state.searchTerm} onChange={event=>props.dispatch({type: 'updateSearchTerm', value: event.target.value})}/>
+      <FaSearch className='icon' size='1.6em' onClick={()=>setSearchOpen(!searchOpen)}/>
     </div>
   )
 }

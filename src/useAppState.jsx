@@ -10,7 +10,8 @@ const useAppState = () => {
     boardList: {},
     errors: [],
     announce: "",
-    updatePath: "/"
+    updatePath: "/",
+    searchTerm: ""
   }
   const reducer = (state, action) => {
     switch (action.type) {
@@ -28,6 +29,8 @@ const useAppState = () => {
         return {...state, subscriptions: [...state.subscriptions, action.subscribe]}
       case 'boardDump':
         return {...state, boardList: {...state.boardList, ...action.boardDump}}
+      case 'updateSearchTerm':
+        return {...state, searchTerm: action.value}
       case 'error':
         return {...state, errors: state.errors.push(action.error)}
       default:
