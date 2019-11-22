@@ -24,6 +24,10 @@ const CONNECTION_STATUS_OPEN = 1
 // const CONNECTION_STATUS_CLOSED = 3
 
 export default props => {
+  const [state, dispatch] = useAppState()
+  const [messageHistory, setMessageHistory] = useState([])
+  const match = useRoutes(routes)
+
   const options = useMemo(() => ({
     onOpen: event =>  {
       dispatch({type: 'updateReadyState', readyState: 1})
@@ -34,12 +38,8 @@ export default props => {
     onError: error => {
       console.log('Socket Error', error);
     }
-  }) ,[])
-
-  const [state, dispatch] = useAppState()
-  const [messageHistory, setMessageHistory] = useState([])
+  }) , [dispatch])
   const [sendMessage, lastMessage, readyState] = useWebSocket('ws://0.0.0.0:42042', options)
-  const match = useRoutes(routes)
 
   useEffect(() => {
     if (lastMessage !== null) {
@@ -50,7 +50,7 @@ export default props => {
         dispatch({type: action, [action]: data})
       }
     }
-  }, [lastMessage])
+  }, [lastMessage, dispatch])
 
   useEffect(() => {
     if (Object.keys(state.boardList).length > 0) {

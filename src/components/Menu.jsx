@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import { A , usePath } from 'hookrouter'
 import useMediaQuery from 'use-media-query-hook'
 import { FaHamburger, FaSearch, FaEllipsisV, FaHandshake,FaCaretDown } from 'react-icons/fa'
@@ -6,27 +6,11 @@ import { FaHamburger, FaSearch, FaEllipsisV, FaHandshake,FaCaretDown } from 'rea
 import { U } from '../constants'
 
 const BoardDropDown = props => {
-  const [focus, setFocus] = props.useFocus
-  const dropDownRef = useRef()
   let currentBoard = props.state.boardList[U.trim.path(props.state.updatePath)]
-
-  const handleClick = event => {
-    if (dropDownRef.current.contains(event.target)) {
-      return
-    }
-    setFocus(null)
-  }
-
-  useEffect(()=>{
-      document.addEventListener("mousedown", handleClick)
-    return () => {
-      document.removeEventListener("mousedown", handleClick)
-    }
-  }, [])
 
   const listBoards = () => {
     return Object.keys(props.state.boardList).map(board => {
-      return <li key={board} onClick={toggleDropDown}>
+      return <li key={board} >
         <A className='board-link' href={`/${board}`}>
           <span>/</span>
           <span className='board-path'>{board}</span>
@@ -36,23 +20,29 @@ const BoardDropDown = props => {
       </li>
     })
   }
-  const toggleDropDown = () => {
-    focus ? setFocus(null) : setFocus('dropDown')
-  }
+
   const listStyle = () => {
     const open = {display: 'flex'}
     const closed = {display: 'none'}
-    return focus === 'dropDown' ? open : closed
+    return props.state.focus === 'board-list' ? open : closed
   }
+
   return (
-    <div ref={dropDownRef} className='board-drop-down' onClick={toggleDropDown} >
+    <div className='board-drop-down' onClick={()=>{
+      props.dispatch({type: 'focus', focus: 'board-list'})
+    }} >
       <div className='current-board-name'>
         <div className='board-path'>/{U.trim.path(props.state.updatePath)}</div>
         <div>-</div>
         <div className='board-name'>{!!currentBoard && currentBoard.name}</div>
         <FaCaretDown className='menu-carrot' size='1rem'/>
       </div>
-      <ul className='board-list compact' style={listStyle()}>
+      <ul className='board-list compact' style={listStyle()} onClick={event=>{
+        event.stopPropagation()
+        props.state.focus === 'board-list'
+          ? props.dispatch({type: 'focus', focus: ""})
+          : props.dispatch({type: 'focus', focus: "board-list"})
+      }}>
         {listBoards()}
         <li><A className='board-link' href='/'>home</A></li>
       </ul>
@@ -61,12 +51,21 @@ const BoardDropDown = props => {
 }
 
 const Search = props => {
-  const [searchOpen, setSearchOpen] = useState(false)
-  console.log(props);
   return (
-    <div className='search' >
-      <input className={searchOpen ? 'text open' : 'text'} type='text' value={props.state.searchTerm} onChange={event=>props.dispatch({type: 'updateSearchTerm', value: event.target.value})}/>
-      <FaSearch className='icon' size='1.6em' onClick={()=>setSearchOpen(!searchOpen)}/>
+    <div className='search' onClick={()=>props.dispatch({type: 'focus', focus: 'search'})}>
+      <input className={props.state.focus === 'search' ? 'text open' : 'text'}
+        type='text'
+        value={props.state.searchTerm}
+        onChange={event=>props.dispatch({type: 'updateSearchTerm', value: event.target.value})}/>
+      <FaSearch
+        className='icon'
+        size='1.6em'
+        onClick={event=>{
+          event.stopPropagation()
+          props.state.focus === 'search'
+            ? props.dispatch({type: 'focus', focus: ""})
+            : props.dispatch({type: 'focus', focus: "search"})
+        }}/>
     </div>
   )
 }
@@ -75,6 +74,7 @@ const Search = props => {
 export default props => {
   const path = usePath()
   const isSmall = useMediaQuery('(max-width: 600px)')
+  // eslint-disable-next-line
   const isLarge = useMediaQuery('(min-width: 1000px)')
   const listBoards = () => {
     return Object.keys(props.state.boardList).map(board => {
@@ -94,13 +94,12 @@ export default props => {
     })
     return `/${board}`
   }
-  const useFocus = useState(null)
   const compactMenu = () => {
     return (
       <div className='menu compact'>
         <div className='hamburger'><FaHamburger size='1.6em'/></div>
-        <BoardDropDown {...props} useFocus={useFocus}/>
-        <Search {...props} useFocus={useFocus}/>
+        <BoardDropDown {...props} />
+        <Search {...props} />
         <div className='network'><FaHandshake size='1.6em' /></div>
         <div className='options'><FaEllipsisV size='1.6em' /></div>
       </div>

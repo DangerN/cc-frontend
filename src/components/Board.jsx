@@ -20,7 +20,7 @@ export default props => {
     dispatch({type: "subscribe", subscribe: boardIdenifier})
   }
   return (
-    <div className='board' id={boardIdenifier}>
+    <div className='board' id={boardIdenifier} onClick={()=>dispatch({type: 'focus', focus: 'board'})}>
       { match({...boardList[boardIdenifier]}) }
     </div>
   )

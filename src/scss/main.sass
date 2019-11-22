@@ -10,10 +10,10 @@ html, body
 
 #root
   background: green
-  height: 100vh
-  width: 100vw
-  display: flex
-  flex-flow: column
+  // height: 100vh
+  // width: 100vw
+  // display: flex
+  // flex-flow: column
   align-items: center
   font-family: 'Roboto', sans-serif
 
@@ -93,9 +93,10 @@ html, body
   position: absolute
   top: 10vh
   overflow: scroll
+  width: 100vw
 
 .menu
-  position: absolute
+  position: sticky
   z-index: 10
   &.compact
     width: 100vw
@@ -111,6 +112,7 @@ html, body
   justify-content: space-around
   flex-flow: wrap
   margin: 1rem 0rem
+  overflow: scroll
   .catalog-card
     border-radius: 3px
     padding: .3rem

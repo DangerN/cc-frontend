@@ -11,7 +11,8 @@ const useAppState = () => {
     errors: [],
     announce: "",
     updatePath: "/",
-    searchTerm: ""
+    searchTerm: "",
+    focus: ""
   }
   const reducer = (state, action) => {
     switch (action.type) {
@@ -31,6 +32,8 @@ const useAppState = () => {
         return {...state, boardList: {...state.boardList, ...action.boardDump}}
       case 'updateSearchTerm':
         return {...state, searchTerm: action.value}
+      case 'focus':
+        return {...state, focus: action.focus}
       case 'error':
         return {...state, errors: state.errors.push(action.error)}
       default:

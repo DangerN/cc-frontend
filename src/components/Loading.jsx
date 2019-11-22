@@ -31,7 +31,7 @@ export default props => {
         return (
           <div className={ loaded ? 'curtain thumb loaded' : 'curtain thumb loading'}>
             { SVG.rings() }
-            <img src={link} className='img thumb' onLoad={()=>setLoaded(true)}/>
+            <img src={link} className='img thumb' alt='media' onLoad={()=>setLoaded(true)}/>
           </div>
         )
       }
@@ -42,7 +42,7 @@ export default props => {
         return (
           <div className={ load ? 'curtain banner loaded' : 'curtain banner loading'}>
             { SVG.rings() }
-            <img src={link} className='img banner wide' onLoad={()=>setLoad(true)}/>
+            <img src={link} className='img banner wide' alt='banner' onLoad={()=>setLoad(true)}/>
           </div>
         )
       }
