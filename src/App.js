@@ -9,6 +9,7 @@ import Banner from './components/Banner'
 import Menu from './components/Menu'
 import Loading from './components/Loading'
 import useAppState from './useAppState'
+import New from './components/New'
 
 import './css/main.css'
 import './css/loading_screen.css'
@@ -83,6 +84,7 @@ export default props => {
         useLoad={useState(false)}
       />
       {match({...state, send: sendMessage, dispatch: dispatch})}
+      <New state={state}/>
     </>
   )
 }

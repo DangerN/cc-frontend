@@ -38,7 +38,7 @@ const useAppState = () => {
         return {...state, errors: state.errors.push(action.error)}
       default:
         console.log(action);
-        throw new Error('u fugged up lamao')
+        throw new Error('action type', action.type, 'not found')
     }
   }
   const [state, dispatch] = useReducer(reducer, initialState)

@@ -1,5 +1,16 @@
 import React from 'react'
 
+const NET_PATHS = {
+  DBW: 'http://0.0.0.0:9002'
+}
+
+export const NET = {
+  DBW: {
+    BASE: NET_PATHS.DBW,
+    NEW: `${NET_PATHS.DBW}/new`
+  }
+}
+
 export const FLAG_KEY = {
   'media': ['img', 'webm', 'embed']
 }
